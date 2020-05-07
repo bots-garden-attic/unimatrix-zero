@@ -49,9 +49,16 @@ fs.writeFile('handle.js', function_code, (err,data) => {
 		app.post(`/${function_name}`, (req, res, next) => {
 			res.type(content_type)
 			let params = req.body
-			res.send(code.handle(params))
+			try {
+				res.send(code.handle(params))
+			} catch(err) {
+				if(content_type=="json") {
+					res.send({ error: err })
+				} else {
+					res.send(err)
+				}
+			}
 		})
-
 	}
 
 })

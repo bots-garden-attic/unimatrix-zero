@@ -16,10 +16,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-    #- name: Build the Docker image
-    #  run: docker build . --file ./javascript/Dockerfile --tag unimatrix-zero-javascript:$(date +%s)
-    #- name: Push the tagged Docker image
-    #  run: docker push unimatrix-zero-javascript:$(date +%s)
+    - name: Build the Docker image
+      run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:$(date +%s)
+    - name: Push the tagged Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:$(date +%s)
     - name: Build the latest Docker image
       run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:latest .
     - name: Push the latest Docker image
