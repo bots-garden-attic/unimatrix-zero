@@ -28,7 +28,7 @@ fs.writeFile('./public/README.md', readme, (err,data) => {
   }
 })
 
-fs.writeFile('handle.js', function_code, (err,data) => {
+fs.writeFile('./handle.js', function_code, (err,data) => {
   if (err) {
 		app.get(`/${function_name}`, (req, res) => {
 			res.type('json')
