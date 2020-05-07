@@ -10,7 +10,7 @@
 | Easiest way to add dependencies |  |
 | Dashboard | how to query Prometheus API? Other things? |
 | Framework to add business metrics | Prometheus |
-|  |  |
+| Create `kn` plugin | to simplify the use of kn with unimatrix-zero |
 |  |  |
 |  |  |
 |  |  |
