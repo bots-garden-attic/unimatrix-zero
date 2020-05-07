@@ -17,9 +17,9 @@ jobs:
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build the Docker image
-      run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:panda .
+      run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:frog .
     - name: Push the tagged Docker image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:panda
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:frog
     - name: Build the latest Docker image
       run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:latest .
     - name: Push the latest Docker image
