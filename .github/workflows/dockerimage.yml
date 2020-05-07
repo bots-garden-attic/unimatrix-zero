@@ -18,8 +18,8 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build the Docker image
       run: docker build . --file ./javascript/Dockerfile --tag unimatrix-zero-javascript:$(date +%s)
-    #- name: Push the tagged Docker image
-    #  run: docker push unimatrix-zero-javascript:$(date +%s)
+    - name: Push the tagged Docker image
+      run: docker push unimatrix-zero-javascript:$(date +%s)
     #- name: Build the latest Docker image
     #  run: docker build . --file ./javascript/Dockerfile --tag unimatrix-zero-javascript:latest
     #- name: Push the latest Docker image
