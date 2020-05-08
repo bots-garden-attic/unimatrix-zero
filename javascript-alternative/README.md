@@ -1,24 +1,12 @@
-# Unimatrix-Zero
+# JavaScript (alternative) FaaS runtime for Knative
 
-**Unimatrix-Zero** is a set of "FaaS runtimes" to deploy quickly small functions on **Knative** and benefit of all qualities of **Knative** (serving and eventing).
+> 🚧 WIP
 
-🖐️ **Unimatrix-Zero** runtimes are only intended to experiments easily with **Knative**
+🐳 Docker image: [https://hub.docker.com/r/k33g/unimatrix-zero-javascript-alternative](https://hub.docker.com/r/k33g/unimatrix-zero-javascript-alternative)
 
-## Requirements
+## How to use it
 
-- Knative serving
-- Knative eventing (right now, optional)
-- Install **kn** (the Knative CLI)
-
-## Runtimes
-
-### JavaScript (NodeJS)
-
-Right now, it's the only one.
-
-#### How to use it
-
-##### Create a function
+### Create a function
 
 ```bash
 docker_user="k33g"
@@ -26,12 +14,13 @@ service="unimatrix-zero-js-hello"
 namespace="k-apps"
 
 read -d '' CODE << EOF
-let handle = params => {
+let handle = (params) => {
   return {
     message: "👋 Hello World 🌍",
     total: 42
   }
 }
+exports.handle = handle
 EOF
 
 kn service create ${service} \
@@ -53,17 +42,18 @@ curl -d '{"name":"Bob Morane"}' \
 -X POST http://unimatrix-zero-js-hello.k-apps.192.168.64.70.xip.io/hello
 ```
 
-##### Update the function
+### Update the function
 
 ```bash
 read -d '' CODE << EOF
-let handle = params => {
+let handle = (params) => {
   return {
     message: "👋 Hello World 🌍",
     total: 42,
     params: params
   }
 }
+exports.handle = handle
 EOF
 
 kn service update ${service} \
