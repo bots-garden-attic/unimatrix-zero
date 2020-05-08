@@ -11,56 +11,39 @@ const function_name = process.env.FUNCTION_NAME || `hello`
 const function_code = process.env.FUNCTION_CODE 
 || 
 `
-let handle = (params) => {
-	return {message:"👋 Hello World 🌍"}
+let handle = params => {
+	return {message:"👋 Hello World 🌍", params: params}
 }
-exports.handle = handle
 `
 const readme = process.env.README || `👋 Hello World 🌍`
+
+const code = new Function(`"use strict"; \n${function_code}\nreturn handle`)
 
 app.use(express.static('public'))
 app.use(express.json())
 
-// Create the file(s)
-fs.writeFile('./public/README.md', readme, (err,data) => {
-  if (err) {
-    return console.log(err)
-  }
+app.get(`/${function_name}`, (req, res) => {
+	res.type('json')
+	res.send({ message: `🖐️ please use POST to call the ${function_name}`})
 })
 
-fs.writeFile('./handle.js', function_code, (err,data) => {
-  if (err) {
-		app.get(`/${function_name}`, (req, res) => {
-			res.type('json')
-			res.send({ error: err })
-		})
-		app.post(`/${function_name}`, (req, res, next) => {
-			res.type('json')
-			res.send({ error: err })
-		})
-	} else {
-		const code = require('./handle')  
+app.post(`/${function_name}`, (req, res, next) => {
+	res.type(content_type)
+	let params = req.body
 
-		app.get(`/${function_name}`, (req, res) => {
-			res.type('json')
-			res.send({ message: `🖐️ please use POST to call the ${function_name}`})
-		})
-
-		app.post(`/${function_name}`, (req, res, next) => {
-			res.type(content_type)
-			let params = req.body
-			try {
-				res.send(code.handle(params))
-			} catch(err) {
-				if(content_type=="json") {
-					res.send({ error: err })
-				} else {
-					res.send(err)
-				}
-			}
-		})
+	try {
+		res.send(code()(params))
+	} catch(err) {
+		if(content_type=="json") {
+			res.send({ error: err })
+		} else {
+			res.send(err)
+		}
 	}
+})
 
+app.get(`/README`, (req, res) => {
+	res.send(readme)
 })
 
 app.listen(port, () => console.log(`🌍 webapp is listening on port ${port}!`))
