@@ -1,7 +1,8 @@
 .vscode
 .DS_Store
 javascript/node_modules
-javascript/handle.js
-javascript/public/README.md
+javascript-alternative/node_modules
+javascript-alternative/handle.js
+javascript-alternative/public/README.md
 samples/*
 
