@@ -22,7 +22,7 @@ class MainVerticle : AbstractVerticle() {
     router.route().handler(BodyHandler.create())
     val kompilo = Kompilo()
     val httpPort = System.getenv("PORT")?.toInt() ?: 8080
-    val readme = System.getenv("README") ?: "👋 Hello World 🌍"
+    val readme = System.getenv("README") ?: "Hello World"
     val contentType = System.getenv("CONTENT_TYPE") ?: "application/json;charset=UTF-8"
     val functionName = System.getenv("FUNCTION_NAME") ?: "hello"
 
@@ -30,7 +30,7 @@ class MainVerticle : AbstractVerticle() {
     val functionCode = System.getenv("FUNCTION_CODE") ?: """
       fun handle(params: Any): Any {
         return json {
-          obj("message" to "👋 Hello World 🌍")
+          obj("message" to "Hello World!!!")
           obj("params" to params)
         }.encodePrettily()
       }
@@ -90,7 +90,7 @@ class MainVerticle : AbstractVerticle() {
       context.response().putHeader("content-type", "application/json;charset=UTF-8")
         .end(
           json {
-            obj("message" to "🖐️ please use POST to call the ${functionName}")
+            obj("message" to "Please use POST to call the ${functionName}")
           }.encodePrettily()
         )
     }

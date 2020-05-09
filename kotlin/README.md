@@ -16,7 +16,7 @@ namespace="k-apps"
 read -d '' CODE << EOF
 fun handle(params: Any): Any {
   return json {
-    obj("message" to "👋 Hello World 🌍")
+    obj("message" to "Hello World!!!")
     obj("total" to 42)
   }.encodePrettily()
 }
@@ -47,7 +47,7 @@ curl -d '{"name":"Bob Morane"}' \
 read -d '' CODE << EOF
 fun handle(params: Any): Any {
   return json {
-    obj("message" to "👋 Hello World 🌍")
+    obj("message" to "Hello World!!!")
     obj("total" to 42)
     obj("params" to params)
   }.encodePrettily()
