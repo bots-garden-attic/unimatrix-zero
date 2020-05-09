@@ -14,10 +14,15 @@ service="unimatrix-zero-kotlin-hello"
 namespace="k-apps"
 
 read -d '' CODE << EOF
+import io.vertx.kotlin.core.json.json
+import io.vertx.kotlin.core.json.obj
+
 fun handle(params: Any): Any {
   return json {
-    obj("message" to "Hello World!!!")
-    obj("total" to 42)
+    obj(
+      "message" to "Hello World!!!",
+      "total" to 42
+    )
   }.encodePrettily()
 }
 EOF
@@ -45,11 +50,16 @@ curl -d '{"name":"Bob Morane"}' \
 
 ```bash
 read -d '' CODE << EOF
+import io.vertx.kotlin.core.json.json
+import io.vertx.kotlin.core.json.obj
+
 fun handle(params: Any): Any {
   return json {
-    obj("message" to "Hello World!!!")
-    obj("total" to 42)
-    obj("params" to params)
+    obj(
+      "message" to "Hello World!!!",
+      "total" to 42,
+      "params" to params
+    )
   }.encodePrettily()
 }
 EOF
