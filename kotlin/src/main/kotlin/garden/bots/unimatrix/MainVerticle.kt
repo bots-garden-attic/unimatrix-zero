@@ -19,6 +19,7 @@ class MainVerticle : AbstractVerticle() {
   override fun start(startPromise: Promise<Void>) {
 
     val router = Router.router(vertx)
+    router.route().handler(BodyHandler.create())
     val kompilo = Kompilo()
     val httpPort = System.getenv("PORT")?.toInt() ?: 8080
     val readme = System.getenv("README") ?: "👋 Hello World 🌍"
@@ -38,7 +39,7 @@ class MainVerticle : AbstractVerticle() {
     val compiledFunction = kompilo.compileFunction(functionCode)
 
     router.route("/*").handler(StaticHandler.create().setCachingEnabled(false))
-    router.route().handler(BodyHandler.create())
+
 
     compiledFunction.let {
       when(it) {

@@ -12,6 +12,9 @@
 
 ## Runtimes
 
+- JavaScript
+- Kotlin
+
 ### JavaScript (NodeJS)
 
 Right now, it's the only one.
