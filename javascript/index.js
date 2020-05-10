@@ -11,7 +11,7 @@ const function_name = process.env.FUNCTION_NAME || `hello`
 const function_code = process.env.FUNCTION_CODE 
 || 
 `
-let handle = params => {
+let ${function_name} = params => {
 	return {message:"👋 Hello World 🌍", params: params}
 }
 `
@@ -21,15 +21,10 @@ const readme = process.env.README || `👋 Hello World 🌍`
 // https://2ality.com/2014/01/eval.html
 const code = new Function(`"use strict"; \n${function_code}\nreturn handle`)
 
-app.use(express.static('public'))
+//app.use(express.static('public'))
 app.use(express.json())
 
-app.get(`/${function_name}`, (req, res) => {
-	res.type('json')
-	res.send({ message: `🖐️ please use POST to call the ${function_name}`})
-})
-
-app.post(`/${function_name}`, (req, res, next) => {
+app.post(`/`, (req, res, next) => {
 	res.type(content_type)
 	let params = req.body
 
@@ -44,8 +39,8 @@ app.post(`/${function_name}`, (req, res, next) => {
 	}
 })
 
-app.get(`/README`, (req, res) => {
+app.get(`/`, (req, res) => {
 	res.send(readme)
 })
 
-app.listen(port, () => console.log(`🌍 webapp is listening on port ${port}!`))
+app.listen(port, () => console.log(`🌍 JavaScript UniMatrix-Zero runtime for ${function_name} function started on port ${port}!`))
