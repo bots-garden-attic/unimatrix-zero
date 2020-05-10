@@ -8,7 +8,7 @@ import org.graalvm.polyglot.*
 
 class Kompilo {
   var language: String = ""
-  val scriptContext = Context.create()
+  val scriptContext = Context.newBuilder().allowAllAccess(true).build()
 
   fun compileFunction(functionCode : String, language: String) : Either<Exception, Any> {
     this.language = language
@@ -21,6 +21,9 @@ class Kompilo {
 
   fun invokeFunction(name : String, params : Any) : Either<Exception, Any> {
     return try {
+      //context.getBindings("js").putMember("javaObj", new MyClass());
+      scriptContext.getBindings(this.language).putMember("param", params)
+
       Right(scriptContext.getBindings(this.language).getMember(name).execute(params))
     } catch (exception: Exception) {
       Left(exception)
