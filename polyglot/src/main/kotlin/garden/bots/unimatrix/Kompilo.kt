@@ -8,8 +8,8 @@ import org.graalvm.polyglot.*
 
 class Kompilo {
   var language: String = ""
-  val scriptContext = Context.create()
-  //val scriptContext = Context.newBuilder().allowAllAccess(true).build()
+  //val scriptContext = Context.create()
+  val scriptContext = Context.newBuilder().allowAllAccess(true).build()
 
   fun compileFunction(functionCode : String, language: String) : Either<Exception, Any> {
     this.language = language
