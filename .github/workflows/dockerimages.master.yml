@@ -32,3 +32,17 @@ jobs:
     - name: Push the latest Kotlin runtime Docker image
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-kotlin:latest
 
+  build-polyglot:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build the latest polyglot runtime Docker image
+      run: cd kotlin; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:latest .
+    - name: Push the latest polyglot runtime Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:latest
+    
+    
