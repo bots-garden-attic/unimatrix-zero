@@ -1,0 +1,34 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build-javascript:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build the latest Javascript runtime Docker image
+      run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:latest .
+    - name: Push the latest Javascript runtime Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:latest
+
+  build-kotlin:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build the latest Kotlin runtime Docker image
+      run: cd kotlin; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-kotlin:latest .
+    - name: Push the latest Kotlin runtime Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-kotlin:latest
+
