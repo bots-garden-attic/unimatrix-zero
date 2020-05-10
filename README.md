@@ -2,6 +2,8 @@
 
 **Unimatrix-Zero** is a set of "FaaS runtimes" to deploy quickly small functions on **Knative** and benefit of all qualities of **Knative** (serving and eventing).
 
+> eventing part is in progress
+
 🖐️ **Unimatrix-Zero** runtimes are only intended to experiments easily with **Knative**
 
 ## Requirements

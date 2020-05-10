@@ -5,7 +5,6 @@ const app = express()
 const port = process.env.PORT || 8080
 
 //TODO: check value
-// the static page could be display something like a README with version of components
 const content_type = process.env.CONTENT_TYPE || `json`
 const function_name = process.env.FUNCTION_NAME || `hello`
 const function_code = process.env.FUNCTION_CODE 
@@ -21,7 +20,6 @@ const readme = process.env.README || `👋 Hello World 🌍`
 // https://2ality.com/2014/01/eval.html
 const code = new Function(`"use strict"; \n${function_code}\nreturn ${function_name}`)
 
-//app.use(express.static('public'))
 app.use(express.json())
 
 app.post(`/`, (req, res, next) => {
