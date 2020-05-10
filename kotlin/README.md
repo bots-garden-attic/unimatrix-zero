@@ -10,14 +10,14 @@
 
 ```bash
 docker_user="k33g"
-service="unimatrix-zero-kotlin-hello"
+service="hello-kotlin"
 namespace="k-apps"
 
 read -d '' CODE << EOF
 import io.vertx.kotlin.core.json.json
 import io.vertx.kotlin.core.json.obj
 
-fun handle(params: Any): Any {
+fun hello(params: Any): Any {
   return json {
     obj(
       "message" to "Hello World!!!",
@@ -38,13 +38,15 @@ kn revision list -s ${service} -n ${namespace}
 kn route list -n ${namespace}
 ```
 
-Call the `hello` function:
+Call the `hello` function with POST request:
 
 ```bash
 curl -d '{"name":"Bob Morane"}' \
 -H "Content-Type: application/json" \
--X POST http://unimatrix-zero-kotlin-hello.k-apps.192.168.64.70.xip.io/hello
+-X POST http://unimatrix-zero-kotlin-hello.k-apps.192.168.64.70.xip.io
 ```
+
+> Remark: if you use a GET request, you'll get the content of the `README` environment variable
 
 ### Update the function
 
@@ -53,7 +55,7 @@ read -d '' CODE << EOF
 import io.vertx.kotlin.core.json.json
 import io.vertx.kotlin.core.json.obj
 
-fun handle(params: Any): Any {
+fun hello(params: Any): Any {
   return json {
     obj(
       "message" to "Hello World!!!",

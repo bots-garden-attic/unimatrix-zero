@@ -12,10 +12,10 @@
 
 ## Runtimes
 
-- JavaScript
-- Kotlin
+- JavaScript: [javascript/README.md](javascript/README.md)
+- Kotlin: [kotlin/README.md](kotlin/README.md)
 
-### JavaScript (NodeJS)
+### Example: JavaScript (NodeJS)
 
 Right now, it's the only one.
 
@@ -25,11 +25,11 @@ Right now, it's the only one.
 
 ```bash
 docker_user="k33g"
-service="unimatrix-zero-js-hello"
-namespace="k-apps"
+service="hello-node"
+namespace="k-apps" # create the namespace before
 
 read -d '' CODE << EOF
-let handle = params => {
+let hello = params => {
   return {
     message: "👋 Hello World 🌍",
     total: 42
@@ -53,14 +53,16 @@ Call the `hello` function:
 ```bash
 curl -d '{"name":"Bob Morane"}' \
 -H "Content-Type: application/json" \
--X POST http://unimatrix-zero-js-hello.k-apps.192.168.64.70.xip.io/hello
+-X POST http://unimatrix-zero-js-hello.k-apps.192.168.64.70.xip.io
 ```
+
+> Remark: if you use a GET request, you'll get the content of the `README` environment variable
 
 ##### Update the function
 
 ```bash
 read -d '' CODE << EOF
-let handle = params => {
+let hello = params => {
   return {
     message: "👋 Hello World 🌍",
     total: 42,
