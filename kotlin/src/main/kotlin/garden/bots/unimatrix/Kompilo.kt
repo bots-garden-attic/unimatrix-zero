@@ -18,6 +18,14 @@ class Kompilo {
     }
   }
 
+  fun invokeFunction(name : String, params : Any) : Either<Exception, Any> {
+    return try {
+      Right(invoker.invokeFunction(name, params))
+    } catch (exception: Exception) {
+      Left(exception)
+    }
+  }
+
   fun invokeHandleFunction(params : Any) : Either<Exception, Any> {
     return try {
       Right(invoker.invokeFunction("handle", params))

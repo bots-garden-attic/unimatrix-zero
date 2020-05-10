@@ -28,7 +28,7 @@ class MainVerticle : AbstractVerticle() {
 
     // should I name the function as I want?
     val functionCode = System.getenv("FUNCTION_CODE") ?: """
-      fun handle(params: Any): Any {
+      fun ${functionName}(params: Any): Any {
         return json {
           obj("message" to "👋 Hello World 🌍")
           obj("params" to params)
@@ -38,12 +38,12 @@ class MainVerticle : AbstractVerticle() {
 
     val compiledFunction = kompilo.compileFunction(functionCode)
 
-    router.route("/*").handler(StaticHandler.create().setCachingEnabled(false))
+    //router.route("/*").handler(StaticHandler.create().setCachingEnabled(false))
 
     compiledFunction.let {
       when(it) {
         is Either.Left -> { // compilation error
-          router.post("/${functionName}").handler { context ->
+          router.post("/").handler { context ->
             context.response().putHeader("content-type", "application/json;charset=UTF-8")
               .end(
                 json {
@@ -54,11 +54,11 @@ class MainVerticle : AbstractVerticle() {
         }
         is Either.Right -> { // compilation is OK, and name of the function to invoke is "handle"
           //val function = it.b
-          router.post("/${functionName}").handler { context ->
+          router.post("/").handler { context ->
 
             val params = context.bodyAsJson
             // call the function
-            kompilo.invokeHandleFunction(params).let {
+            kompilo.invokeFunction(functionName, params).let {
               when(it) {
                 is Either.Left -> { // execution error
                   context.response().putHeader("content-type", "application/json;charset=UTF-8")
@@ -80,20 +80,10 @@ class MainVerticle : AbstractVerticle() {
       }
     }
 
-    router.get("/README").handler { context ->
+    router.get("/").handler { context ->
       context.response().putHeader("content-type", "text/plain;charset=UTF-8")
         .end(readme)
     }
-
-    router.get("/${functionName}").handler { context ->
-      context.response().putHeader("content-type", "application/json;charset=UTF-8")
-        .end(
-          json {
-            obj("message" to "🖐️ Please use POST to call the ${functionName}")
-          }.encodePrettily()
-        )
-    }
-
     vertx
       .createHttpServer()
       .requestHandler(router)
