@@ -19,7 +19,7 @@ const readme = process.env.README || `👋 Hello World 🌍`
 
 // Interesting blog post from Axel Rauschmayer
 // https://2ality.com/2014/01/eval.html
-const code = new Function(`"use strict"; \n${function_code}\nreturn handle`)
+const code = new Function(`"use strict"; \n${function_code}\nreturn ${function_name}`)
 
 //app.use(express.static('public'))
 app.use(express.json())
