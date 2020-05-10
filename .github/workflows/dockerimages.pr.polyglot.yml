@@ -1,4 +1,4 @@
-name: Docker Image CI PULL REQUEST Kotlin
+name: Docker Image CI PULL REQUEST Polyglot
 
 on:
   pull_request:
