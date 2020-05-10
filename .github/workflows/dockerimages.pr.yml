@@ -1,4 +1,4 @@
-name: Docker Image CI PULL REQUEST
+name: Greetings PULL REQUEST
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  build-javascript:
+  Greetings:
 
     runs-on: ubuntu-latest
 
