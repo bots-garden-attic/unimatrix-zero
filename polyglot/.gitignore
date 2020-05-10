@@ -1,0 +1,7 @@
+.vertx/*
+target/*
+*.iml
+.idea/*
+*.DS_Store
+deploy.sh
+deploy.config
