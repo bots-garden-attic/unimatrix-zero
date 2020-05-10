@@ -55,7 +55,8 @@ class MainVerticle : AbstractVerticle() {
           //val function = it.b
           router.post("/").handler { context ->
 
-            val params = context.bodyAsJson.encodePrettily()
+            //val params = context.bodyAsJson.encodePrettily()
+            val params = context.bodyAsJson
 
             // call the function
             kompilo.invokeFunction(functionName, params).let {
