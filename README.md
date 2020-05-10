@@ -16,6 +16,7 @@
 
 - JavaScript: [javascript/README.md](javascript/README.md)
 - Kotlin: [kotlin/README.md](kotlin/README.md)
+- GraalVM: [polyglot/README.md](polyglot/README.md) *(JavaScript, Ruby, Python)*
 
 ### Example: JavaScript (NodeJS)
 

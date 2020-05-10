@@ -1,0 +1,21 @@
+name: Docker Image CI PULL REQUEST Polyglot
+
+on:
+  pull_request:
+    branches: [ master ]
+    paths: 'polyglot/**'
+
+jobs:
+
+  build-polyglot:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build the polyglot runtime Docker image
+      run: cd polyglot; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:panda .
+    - name: Push the tagged polyglot runtime Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:panda

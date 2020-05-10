@@ -43,7 +43,7 @@ Call the `hello` function with POST request:
 ```bash
 curl -d '{"name":"Bob Morane"}' \
 -H "Content-Type: application/json" \
--X POST http://unimatrix-zero-kotlin-hello.k-apps.192.168.64.70.xip.io
+-X POST http://hello-kotlin.k-apps.192.168.64.70.xip.io
 ```
 
 > Remark: if you use a GET request, you'll get the content of the `README` environment variable
