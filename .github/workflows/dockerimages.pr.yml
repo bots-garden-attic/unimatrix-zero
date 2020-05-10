@@ -12,22 +12,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Login to DockerHub Registry
-      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-    - name: Build the Javascript runtime Docker image
-      run: cd javascript; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:duck .
-    - name: Push the tagged Javascript runtime Docker image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-javascript:duck
-
-  build-kotlin:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Login to DockerHub Registry
-      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-    - name: Build the Kotlin runtime Docker image
-      run: cd kotlin; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-kotlin:duck .
-    - name: Push the tagged Kotlin runtime Docker image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-kotlin:duck
+    - name: Say hello
+      run: echo "👋 Hello World 🌍"
