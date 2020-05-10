@@ -3,7 +3,7 @@ name: Docker Image CI PULL REQUEST Polyglot
 on:
   pull_request:
     branches: [ master ]
-    paths: 'kotlin/**'
+    paths: 'polyglot/**'
 
 jobs:
 
@@ -16,6 +16,6 @@ jobs:
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build the polyglot runtime Docker image
-      run: cd kotlin; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:panda .
+      run: cd polyglot; docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:panda .
     - name: Push the tagged polyglot runtime Docker image
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/unimatrix-zero-polyglot:panda
